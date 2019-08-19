@@ -86,7 +86,8 @@ then
   /etc/init.d/nfs-kernel-server start
 
   # Give it a second to start-up
-  sleep 100
+  sleep 30
+  exportfs -a
 
   # Use the existence of this file as a flag for other servers to know that
   # NFS is finished with its setup.
