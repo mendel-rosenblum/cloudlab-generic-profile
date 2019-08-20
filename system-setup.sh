@@ -52,7 +52,7 @@ EOM
 
 # NFS specific setup here. NFS exports NFS_SHARED_HOME_EXPORT_DIR (used as
 # a shared home directory for all users), and also NFS_DATASETS_EXPORT_DIR
-# (mount point for CloudLab datasets to which cluster nodes need shared access). 
+# (mount point for CloudLab datasets to which cluster nodes need shared access).
 if [ $(hostname --short) == "nfs" ]
 then
   echo -e "\n===== SETTING UP NFS EXPORTS ON NFS ====="
@@ -83,9 +83,9 @@ then
   done
 
   # Start the NFS service.
-  exportfs -a
+  exportfs -av
   systemctl restart nfs-kernel-server
-  
+
   # Give it a second to start-up
   sleep 5
 
@@ -95,7 +95,7 @@ then
 fi
 
 echo -e "\n===== WAITING FOR NFS SERVER TO COMPLETE SETUP ====="
-# Wait until nfs is properly set up. 
+# Wait until nfs is properly set up.
 while [ "$(ssh nfs "[ -f /local/setup-nfs-done ] && echo 1 || echo 0")" != "1" ]; do
   sleep 1
 done
